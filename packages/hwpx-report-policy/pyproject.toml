@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hwpx-report-policy"
+version = "0.1.0"
+description = "공공기관 보고서 LLM 출력 품질 보정 미들웨어 (순수 정책 계층)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Eum-Jium", email = "203765222+Eum-Jium@users.noreply.github.com" },
+    { name = "SeungJun Lee", email = "105873322+tmdwnsdl@users.noreply.github.com" },
+]
+# 순수 파이썬 — 외부 의존 없음(엔진/LLM 은 주입).
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pytest-asyncio>=0.21"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hwpx-core"
+version = "0.1.6"
+description = "HWPX(한글) 저수준 읽기/쓰기 공용 툴킷 (zip·XML·charmap 원시함수)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Eum-Jium", email = "203765222+Eum-Jium@users.noreply.github.com" },
+    { name = "SeungJun Lee", email = "105873322+tmdwnsdl@users.noreply.github.com" },
+]
+dependencies = [
+    "lxml>=4.9,<6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

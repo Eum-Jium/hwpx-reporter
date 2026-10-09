@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# 테스트·캐시
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 생성물 — 렌더 산출물은 추적하지 않는다
+output/
+storage/
+*.hwpx.bak
+
+# 스킬 빌드 파생물 — skill/build_skill.py 가 packages/ 에서 생성한다(결과 zip 은 build/ — 위 규칙)
+skill/hwpx/scripts/vendor/
+
+# 에디터·OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# tools/ 산출물 — 견본 본문(*_body.py)에서 언제든 다시 렌더할 수 있다
+tools/**/output/
+tools/**/*.hwpx
+tools/**/*.pdf

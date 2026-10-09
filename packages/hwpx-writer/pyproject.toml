@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hwpx-mcp"
+version = "0.1.1"
+description = "공공기관 표준서식 HWPX 보고서 생성 MCP 서버"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Eum-Jium", email = "203765222+Eum-Jium@users.noreply.github.com" },
+    { name = "SeungJun Lee", email = "105873322+tmdwnsdl@users.noreply.github.com" },
+]
+dependencies = [
+    # python-hwpx: private API(tc.cell / _root._headers) 결합 → 정확 버전 핀
+    "python-hwpx==2.18.0",
+    "lxml>=4.9,<6",
+    "fastmcp>=3.2,<4",
+    "pydantic>=2.0",
+    "filelock>=3.0",
+    # hwpx-core 를 쓰는 까닭: 항목부호 판정(markers) 공유 — 세 렌더 경로가 같은 기준을
+    # 써야 한다. 저수준 zip/XML 스택은 python-hwpx 를 그대로 쓴다(core 의 zipio·read 는 미사용).
+    # hwpx-core 는 여기 적지 않는다 — 어떤 인덱스에도 없어 pip 이 해결해 줄 수
+    # 없고(로컬 경로로 함께 설치한다), 적어 두면 한 개만 설치할 때 pip 이 공개
+    # PyPI 에서 같은 이름을 찾는다(dependency confusion). 판 확인은 임포트 시점
+    # hwpx_core.require_version() 이 한다. PyPI 에 실제 게시하면 핀을 되살릴 것.
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+hwpx-mcp = "hwpx_mcp.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"hwpx_mcp.engine" = ["assets/*.hwpx"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

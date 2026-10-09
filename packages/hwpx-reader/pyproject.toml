@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hwpx-reader"
+version = "0.2.0"
+description = "HWPX(한글) 문서 읽기 전용 MCP 서버"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Eum-Jium", email = "203765222+Eum-Jium@users.noreply.github.com" },
+    { name = "SeungJun Lee", email = "105873322+tmdwnsdl@users.noreply.github.com" },
+]
+dependencies = [
+    "mcp>=1.0,<2",
+    "lxml>=4.9,<6",
+    # hwpx-core 는 여기 적지 않는다 — 어떤 인덱스에도 없어 pip 이 해결해 줄 수
+    # 없고(로컬 경로로 함께 설치한다), 적어 두면 한 개만 설치할 때 pip 이 공개
+    # PyPI 에서 같은 이름을 찾는다(dependency confusion). 판 확인은 임포트 시점
+    # hwpx_core.require_version() 이 한다. PyPI 에 실제 게시하면 핀을 되살릴 것.
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+hwpx-reader-mcp = "hwpx_reader.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hwpx-skeleton"
+version = "0.3.3"
+description = "공공기관 표준서식 HWPX 스켈레톤 렌더 MCP 서버 (결정론적 엔진)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Eum-Jium", email = "203765222+Eum-Jium@users.noreply.github.com" },
+    { name = "SeungJun Lee", email = "105873322+tmdwnsdl@users.noreply.github.com" },
+]
+dependencies = [
+    "mcp>=1.0,<2",
+    "lxml>=4.9,<6",
+    # hwpx-core 는 여기 적지 않는다 — 어떤 인덱스에도 없어 pip 이 해결해 줄 수
+    # 없고(로컬 경로로 함께 설치한다), 적어 두면 한 개만 설치할 때 pip 이 공개
+    # PyPI 에서 같은 이름을 찾는다(dependency confusion). 판 확인은 임포트 시점
+    # hwpx_core.require_version() 이 한다. PyPI 에 실제 게시하면 핀을 되살릴 것.
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+hwpx-skeleton-mcp = "hwpx_skeleton.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"hwpx_skeleton" = [
+    "assets/templates/*.hwpx",
+    "assets/guidelines/*.md",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
