@@ -2,6 +2,7 @@
 
 **한/글(HWP) 프로그램 없이, 공공기관 표준서식 보고서(`.hwpx`)를 만들고 읽는 도구.**
 LLM 은 본문 내용만 쓰고, 서식(`□ ◦` 항목부호 · 【주관】 블록 · 휴먼명조 15pt · 간격 · 내어쓰기)은 엔진이 결정론적으로 맞춘다.
+한컴오피스가 없는 PC · 서버 · 리눅스에서도 파이썬으로 돈다 — 공문서 · 보고서 자동 작성, HWP/HWPX 문서 자동화.
 
 > 한국수자원공사(K-water) AI혁신처에서 실무 보고서를 쓰려고 만든 프로젝트다. 기관이 공식 배포하는 도구는 아니다.
 
@@ -164,3 +165,15 @@ MIT — [LICENSE](LICENSE) 참조.
 
 `hwpx-writer` 는 [python-hwpx](https://pypi.org/project/python-hwpx/) 2.18.0 에 의존한다
 (private API 결합으로 정확 버전 핀 필수).
+
+---
+
+## In English
+
+**hwpx-reporter** creates and reads Korean government-standard report documents (`.hwpx`, the Hangul / Hancom Office format)
+**without Hancom Office installed** — on Windows, Linux or a server, from Python.
+The LLM writes only the content; the engine deterministically enforces the layout rules
+(bullet symbols `□ ◦`, heading blocks, fonts, spacing, indentation, line lengths) and warns about lines that break them.
+Use it as a Claude skill (claude.ai / Claude Code), as MCP servers (Claude Desktop and other MCP hosts), or directly from Python.
+Built at K-water (Korea Water Resources Corporation) for real reports; not an official distribution of the agency.
+MIT licensed. Documentation is in Korean; issues in English are welcome.
