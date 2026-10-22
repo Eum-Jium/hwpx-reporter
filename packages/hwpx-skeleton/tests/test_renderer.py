@@ -281,7 +281,7 @@ def test_tab_becomes_hp_tab():
 
 # ── 【주관】 줄 한 줄 맞춤 ────────────────────────────────────────────────
 # 견본 담당자가 셋이면 줄이 판면(48188)을 넘어 날짜 꼬리('18)')가 둘째 줄에
-# 떨어진다(08-18 실물). 장평 95% + 오른쪽 정렬로 맞추되 **글자는 안 바꾼다**.
+# 떨어진다(08-18 실물). 장평 90% + 왼쪽 정렬로 맞추되 **글자는 안 바꾼다**(10-22 · 종전 95%·오른쪽).
 
 def _owner_para(path):
     import re
@@ -301,8 +301,9 @@ def _prop(hdr, kind, pid):
     return m.group(0)
 
 
-def test_주관_줄은_장평_95로_한_줄에_들어간다():
+def test_주관_줄은_장평_90으로_한_줄에_들어간다():
     import re
+    assert R.OWNER_RATIO == 90                  # 사용자가 정한 값(10-22)
     r = HS.render("plan", {"title": "주관"}, output_dir=tempfile.mkdtemp())
     assert r["owner_line_fitted"] is True
     para, hdr = _owner_para(r["path"])
@@ -326,13 +327,13 @@ def test_주관_줄_자간은_손대지_않는다():
     assert got == {"-1", "-3", "-7"}, got
 
 
-def test_주관_줄은_오른쪽_정렬로_날짜_꼬리를_끝에_붙인다():
+def test_주관_줄은_왼쪽_정렬이다():
     import re
     r = HS.render("plan", {"title": "주관"}, output_dir=tempfile.mkdtemp())
     para, hdr = _owner_para(r["path"])
     ppid = re.search(r'paraPrIDRef="(\d+)"', para).group(1)
     align = re.search(r'<hh:align[^/]*/>', _prop(hdr, "paraPr", ppid)).group(0)
-    assert 'horizontal="RIGHT"' in align, align
+    assert 'horizontal="LEFT"' in align, align
 
 
 def test_주관_줄_맞춤이_글자를_바꾸지_않는다():

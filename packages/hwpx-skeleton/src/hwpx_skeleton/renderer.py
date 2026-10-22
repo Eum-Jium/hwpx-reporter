@@ -1056,17 +1056,18 @@ def _make_char_variant(hdr, base_cid: str, color, size_pt, cache: dict,
 # 【주관】 줄 장평(%). 견본 담당자가 **셋이면** 줄이 판면(48188)을 넘어 날짜
 # 꼬리('18)')가 둘째 줄에 떨어진다(08-18 실물 — 계산상 51089 로 2901 초과).
 # 내용은 한 글자도 바꾸지 않는다: 담당자·직급·내선·날짜는 사람이 한/글에서 고치는
-# 자리라 줄여서도 잘라서도 안 된다. 95 는 **사용자가 한/글에서 직접 맞춘 값**이다
+# 자리라 줄여서도 잘라서도 안 된다. 90 은 **사용자가 정한 값**이다(10-22 · 종전 95)
 # — 도구가 매 문서 재서 정하면 문서마다 장평이 흔들려 오히려 서식이 어긋난다.
-OWNER_RATIO = 95
+OWNER_RATIO = 90
 
 
 def fit_owner_line(sec, HP, hdr) -> bool:
-    """【주관】 줄을 **장평 95% · 오른쪽 정렬**로 맞춘다. 손댔으면 True.
+    """【주관】 줄을 **장평 90% · 왼쪽 정렬**로 맞춘다. 손댔으면 True.
 
-    자간은 손대지 않는다(양식이 -1/-3/-7 로 이미 잡아 뒀다). 오른쪽 정렬은
-    날짜 꼬리를 판면 오른쪽 끝에 붙이려는 것이다 — 공문서 관례이고, 장평으로
-    줄인 뒤 남는 자투리가 왼쪽이 아니라 【주관】 앞에 오게 한다.
+    자간은 손대지 않는다(양식이 -1/-3/-7 로 이미 잡아 뒀다). 왼쪽 정렬은
+    사용자가 정했다(10-22 · 종전 오른쪽) — 【주관】 을 제목 밑 왼쪽 끝에 붙이고,
+    장평으로 줄인 뒤 남는 자투리는 날짜 꼬리 뒤로 간다. 양식 원래 값은 양쪽
+    정렬이라 한 줄이면 왼쪽과 같아 보이지만, 양식이 바뀌어도 흔들리지 않게 따로 지정한다.
     """
     target = None
     for p in sec.iter(f"{{{HP}}}p"):
@@ -1089,7 +1090,7 @@ def fit_owner_line(sec, HP, hdr) -> bool:
             changed = True
     ppid = target.get("paraPrIDRef")
     if ppid is not None:
-        new = _make_align_parapr(hdr, ppid, "RIGHT", pcache)
+        new = _make_align_parapr(hdr, ppid, "LEFT", pcache)
         if new != ppid:
             target.set("paraPrIDRef", new)
             changed = True

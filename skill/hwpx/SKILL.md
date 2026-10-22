@@ -5,8 +5,9 @@ description: Create, edit, and review HWPX (한글 워드프로세서) documents
 
 # HWPX Document Creator Skill
 
-<!-- skill-rev: 29 -->
-**rev 29** — 판을 올릴 때는 위 표기만 고친다(빌드가 읽는다).
+<!-- skill-rev: 30 -->
+**rev 30** — 판을 올릴 때는 위 표기만 고친다(빌드가 읽는다).
+· rev 29 → 30: 【주관】 줄을 장평 90% · 왼쪽 정렬로(종전 95% · 오른쪽). 글자는 그대로.
 · rev 28 → 29: 표·그림·붙임 경고도 `warnings` 한 곳으로 모은다 · 블록 조립의 혼합 서식 안내를
   지금 동작(빠지고 [알림])대로 · 양식 유형을 `template_key` 로 함께 주는 법.
 · rev 27 → 28: hwpx_full 의 혼합 서식 [알림] · 옛 XML 조립·템플릿 폴백 걷음 · 참고 문서 바로잡음.
